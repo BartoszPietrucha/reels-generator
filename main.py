@@ -15,7 +15,8 @@ API_TEST = False
 
 if __name__ == "__main__":
     gen = ReelsGenerator()
-    gen._change_voice("assets/test_audio/test.wav")
+    #gen._change_voice("assets/test_audio/test.wav")
+    gen._extract_audio("assets/test_audio/video.mp4")
 
 if API_TEST:
 

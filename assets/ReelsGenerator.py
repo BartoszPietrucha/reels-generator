@@ -1,5 +1,6 @@
 import speech_recognition as sr
 from gtts import gTTS
+import moviepy.editor as mp
 
 class ReelsGenerator:
 
@@ -21,5 +22,9 @@ class ReelsGenerator:
     def _change_voice(self, sound_path, lang="en"):
         text = self._voice_to_text(sound_path)
         self._text_to_voice(text, lang)
+
+    def _extract_audio(self, video_path):
+        clip = mp.VideoFileClip(video_path)
+        clip.audio.write_audiofile("assets/test_audio/extracted.wav")
 
 
