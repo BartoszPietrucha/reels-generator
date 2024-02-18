@@ -11,10 +11,11 @@ import json
 
 
 
-API_TEST = True
+API_TEST = False
 
 if __name__ == "__main__":
     gen = ReelsGenerator()
+    gen._change_voice("assets/test_audio/test.wav")
 
 if API_TEST:
 
