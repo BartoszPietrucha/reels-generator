@@ -2,7 +2,16 @@ from assets.ReelsGenerator import ReelsGenerator
 import requests
 import json
 
-API_TEST = False
+# TODO:
+    # 1. Instagram API in order to upload the reels
+    # 2. voice scraper and the voice transformation automation
+    # 3. video editing automation
+    # 4. tiktok video scraper/downloader/bot
+
+
+
+
+API_TEST = True
 
 if __name__ == "__main__":
     gen = ReelsGenerator()
@@ -18,7 +27,4 @@ if API_TEST:
     files = { 'file' : 'C:/Users/DELL/Downloads/ssstik.io_1708124524510.mp4' }
     response = requests.post(url, json=data, files=files)
 
-    if( response.status_code != requests.codes.created):
-        print("not so good")
-    else:
-        print(response.json())
+    response.raise_for_status()
