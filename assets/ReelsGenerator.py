@@ -1,6 +1,7 @@
 import speech_recognition as sr
 from gtts import gTTS
 import moviepy.editor as mp
+from instabot import Bot
 
 class ReelsGenerator:
 

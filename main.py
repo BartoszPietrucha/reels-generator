@@ -1,6 +1,8 @@
 from assets.ReelsGenerator import ReelsGenerator
+from assets.PhotoGenerator import PhotoGenerator
 import requests
 import json
+from instabot import Bot
 
 # TODO:
     # 1. Instagram API in order to upload the reels
@@ -14,11 +16,21 @@ import json
 API_TEST = False
 
 if __name__ == "__main__":
-    gen = ReelsGenerator()
+    #gen = ReelsGenerator()
     #gen._change_voice("assets/test_audio/test.wav")
     #gen._extract_audio("assets/test_audio/video.mp4")
     gen._replace_audio("assets/test_audio/video.mp4", "assets/test_audio/output.mp3")
 
+    #gen._extract_audio("assets/test_audio/video.mp4")
+    
+    mail = "faday62620@tospage.com"
+    password = "Nowyroczek2003"
+    caption = "#sad,#story_of_my_life,#blackie"
+    
+    bot = Bot()
+    bot.login()
+    bot.upload_photo("C:/Users/DELL/Downloads/sad.jpg",caption)
+    bot.logout()
 
 if API_TEST:
 
