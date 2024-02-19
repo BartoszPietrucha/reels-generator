@@ -8,8 +8,8 @@ class PhotoGenerator:
     def __init__(self):
         self.bot = Bot()
 
-    def login(self, username, password):
-        self.bot.login(username, password)
+    def login(self, log_pass):
+        self.bot.login(*log_pass)
 
     def upload_photo(self, photo_path, caption):
         self.bot.upload_photo(photo_path, caption)
