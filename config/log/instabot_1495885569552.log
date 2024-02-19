@@ -1,0 +1,26 @@
+2024-02-19 14:05:44,666 - instabot version: 0.117.0 (bot) - INFO - Instabot version: 0.117.0 Started
+2024-02-19 14:05:44,666 - instabot version: 0.117.0 (bot) - DEBUG - Bot imported from C:\Users\Milon\AppData\Local\Programs\Python\Python311\Lib\site-packages\instabot\bot\bot.py
+2024-02-19 14:05:58,434 - instabot version: 0.117.0 (api_login) - INFO - Not yet logged in starting: PRE-LOGIN FLOW!
+2024-02-19 14:05:58,728 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: accounts/get_prefill_candidates/ returned response: <Response [429]>
+2024-02-19 14:05:58,728 - instabot version: 0.117.0 (api) - DEBUG - Responsecode indicates error; response content: b'{"message":"Please wait a few minutes before you try again.","status":"fail"}'
+2024-02-19 14:05:58,729 - instabot version: 0.117.0 (api) - ERROR - Request returns 429 error!
+2024-02-19 14:05:58,730 - instabot version: 0.117.0 (api) - WARNING - That means 'too many requests'. I'll go to sleep for 5 minutes.
+2024-02-19 14:10:59,189 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: accounts/get_prefill_candidates/ returned response: <Response [429]>
+2024-02-19 14:10:59,190 - instabot version: 0.117.0 (api) - DEBUG - Responsecode indicates error; response content: b'{"message":"Please wait a few minutes before you try again.","status":"fail"}'
+2024-02-19 14:10:59,190 - instabot version: 0.117.0 (api) - ERROR - Request returns 429 error!
+2024-02-19 14:10:59,190 - instabot version: 0.117.0 (api) - WARNING - That means 'too many requests'. I'll go to sleep for 10 minutes.
+2024-02-19 14:20:59,561 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: accounts/get_prefill_candidates/ returned response: <Response [400]>
+2024-02-19 14:20:59,561 - instabot version: 0.117.0 (api) - DEBUG - Responsecode indicates error; response content: b'{"message":"","status":"fail"}'
+2024-02-19 14:20:59,561 - instabot version: 0.117.0 (api) - ERROR - Request returns 400 error!
+2024-02-19 14:20:59,562 - instabot version: 0.117.0 (api) - INFO - Instagram's error message: 
+2024-02-19 14:20:59,562 - instabot version: 0.117.0 (api) - INFO - Instagram's error message: {}
+2024-02-19 14:20:59,884 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: qe/sync/ returned response: <Response [200]>
+2024-02-19 14:21:00,176 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: launcher/sync/ returned response: <Response [200]>
+2024-02-19 14:21:00,424 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: accounts/contact_point_prefill/ returned response: <Response [200]>
+2024-02-19 14:21:01,932 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: accounts/login/ returned response: <Response [400]>
+2024-02-19 14:21:01,933 - instabot version: 0.117.0 (api) - DEBUG - Responsecode indicates error; response content: b'{"message":"The username you entered doesn\'t appear to belong to an account. Please check your username and try again.","status":"fail","error_title":"Incorrect username","buttons":[{"title":"Try Again","action":"dismiss"}],"invalid_credentials":true,"exception_name":"UserInvalidCredentials","error_type":"invalid_user"}'
+2024-02-19 14:21:01,933 - instabot version: 0.117.0 (api) - ERROR - Request returns 400 error!
+2024-02-19 14:21:01,934 - instabot version: 0.117.0 (api) - INFO - Instagram's error message: The username you entered doesn't appear to belong to an account. Please check your username and try again.
+2024-02-19 14:21:01,934 - instabot version: 0.117.0 (api) - INFO - Error type: invalid_user
+2024-02-19 14:21:01,935 - instabot version: 0.117.0 (api) - ERROR - Failed to login go to instagram and change your password
+2024-02-19 14:21:01,936 - instabot version: 0.117.0 (api) - INFO - Username or password is incorrect.
