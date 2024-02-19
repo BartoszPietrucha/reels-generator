@@ -1,4 +1,5 @@
 from assets.ReelsGenerator import ReelsGenerator
+from assets.PhotoGenerator import PhotoGenerator
 import requests
 import json
 
@@ -14,9 +15,11 @@ import json
 API_TEST = False
 
 if __name__ == "__main__":
-    gen = ReelsGenerator()
+    #gen = ReelsGenerator()
     #gen._change_voice("assets/test_audio/test.wav")
-    gen._extract_audio("assets/test_audio/video.mp4")
+    #gen._extract_audio("assets/test_audio/video.mp4")
+
+    photo = 
 
 if API_TEST:
 
