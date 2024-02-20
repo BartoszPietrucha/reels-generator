@@ -15,14 +15,14 @@ class VideoScraper:
         self.find_links(self.url)
 
 
-    def read_html(self, file_path: str):
+    def read_html(self, file_path: str) -> str:
         """Reads the html file and returns the content as a string."""
         with open(file_path, "r", encoding="utf8") as file:
             links = file.read()
             return links
         
 
-    def find_links(self, html: str):
+    def find_links(self, html: str) -> None:
         """Filters for the links to the videos and saves them in the links list."""
         data = self.read_html(html)
         soup = BeautifulSoup(data, "html.parser")

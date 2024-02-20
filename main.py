@@ -1,7 +1,7 @@
 from assets.ReelsGenerator import ReelsGenerator
 from assets.PhotoGenerator import PhotoGenerator
 from assets.VideoScraper import VideoScraper
-from assets.VideoDownloader import VideoDownloader
+from assets.VideoDownloader import VideoDownloader, get_desktop_path
 import requests
 import json
 from instabot import Bot
@@ -38,5 +38,10 @@ if __name__ == "__main__":
         bot.logout()
 
     if SCRAPER_TEST:
-        #scraper = VideoScraper("assets/data/tiktok.txt")
-        downloader = VideoDownloader()
+        desktop_path = get_desktop_path()
+        scraper = VideoScraper("assets/data/tiktok.txt")
+        downloader = VideoDownloader(f"{desktop_path}\\TikTokVideos")
+        for link in scraper.links[:3]:
+            downloader.download_video(link)
+        
+
