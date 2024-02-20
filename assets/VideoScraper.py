@@ -1,6 +1,4 @@
 from bs4 import BeautifulSoup
-import time
-
 
 
 class VideoScraper:
@@ -17,14 +15,14 @@ class VideoScraper:
         self.find_links(self.url)
 
 
-    def read_html(self, file_path):
+    def read_html(self, file_path: str):
         """Reads the html file and returns the content as a string."""
         with open(file_path, "r", encoding="utf8") as file:
             links = file.read()
             return links
         
 
-    def find_links(self, html):
+    def find_links(self, html: str):
         """Filters for the links to the videos and saves them in the links list."""
         data = self.read_html(html)
         soup = BeautifulSoup(data, "html.parser")

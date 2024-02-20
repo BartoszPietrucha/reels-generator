@@ -1,6 +1,7 @@
 from assets.ReelsGenerator import ReelsGenerator
 from assets.PhotoGenerator import PhotoGenerator
 from assets.VideoScraper import VideoScraper
+from assets.VideoDownloader import VideoDownloader
 import requests
 import json
 from instabot import Bot
@@ -21,9 +22,7 @@ SCRAPER_TEST = True
 if __name__ == "__main__":
     if VIDEO_TEST:
         gen = ReelsGenerator()
-        gen._change_voice("assets/test_audio/test.wav")
-        gen._extract_audio("assets/test_audio/video.mp4")
-        gen._replace_audio("assets/test_audio/video.mp4", "assets/test_audio/output.mp3")
+        gen._edit_video("assets/test_audio/video.mp4")
     
     
 
@@ -39,4 +38,5 @@ if __name__ == "__main__":
         bot.logout()
 
     if SCRAPER_TEST:
-        scraper = VideoScraper("assets/data/tiktok.txt")
+        #scraper = VideoScraper("assets/data/tiktok.txt")
+        downloader = VideoDownloader()
