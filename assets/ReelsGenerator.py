@@ -7,19 +7,22 @@ class ReelsGenerator:
     """
     Responsible for editing the video.
     """
-    TEMP_LOC = "assets/test_audio/"
-    TEMP_AUDIO = f"{TEMP_LOC}extracted.wav"
+    ID = 0
+    
 
-    def __init__(self):
-        pass
+    def __init__(self, output_dir: str, temp_loc: str):
+        self.TEMP_LOC = temp_loc
+        self.TEMP_AUDIO = f"{self.TEMP_LOC}\\extracted.wav"
+        self.OUTPUT_DIR = f"{output_dir}\\edited{self.ID}.mp4"
 
 
     def _edit_video(self, video_path: str, lang="en") -> None:
         """Edits the video by changing the voice to other lector."""
         self._extract_audio(video_path)
         self._change_voice(self.TEMP_AUDIO, lang)
-        self._replace_audio(video_path, self.TEMP_AUDIO, "F:\\Desktop\\TESTREEL\\test.mp4")
+        self._replace_audio(video_path, self.TEMP_AUDIO, self.OUTPUT_DIR)
         os.remove(self.TEMP_AUDIO)  # removes the temporary audio file
+        self.ID += 1
 
 
     def _change_voice(self, sound_path: str, lang="en") -> None:

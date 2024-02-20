@@ -51,7 +51,7 @@ class VideoDownloader:
         self.desktop_path = get_desktop_path()
         self.output_dir = output_dir
         self.options = Options()
-        self.options.add_extension('assets/data/extensions/adblock.crx')  # Path to the extension CRX file
+        self.options.add_extension('assets/data/extensions/adblock.crx')  # Path to the adblock CRX file
         prefs = {
             "download.default_directory": f"{self.output_dir}",
             "download.prompt_for_download": False,  

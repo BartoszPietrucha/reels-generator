@@ -2,6 +2,7 @@ from assets.ReelsGenerator import ReelsGenerator
 from assets.PhotoGenerator import PhotoGenerator
 from assets.VideoScraper import VideoScraper
 from assets.VideoDownloader import VideoDownloader, get_desktop_path
+from assets.ReelsStealer import ReelsStealer
 import requests
 import json
 from instabot import Bot
@@ -17,7 +18,8 @@ from instabot import Bot
 ENDPOINT = "https://www.tiktok.com/@scalingstories"
 API_TEST = False
 VIDEO_TEST = False
-SCRAPER_TEST = True
+SCRAPER_TEST = False
+STEALER_TEST = True
 
 if __name__ == "__main__":
     if VIDEO_TEST:
@@ -43,5 +45,10 @@ if __name__ == "__main__":
         downloader = VideoDownloader(f"{desktop_path}\\TikTokVideos")
         for link in scraper.links[:3]:
             downloader.download_video(link)
+
+    if STEALER_TEST:
+        stealer = ReelsStealer("assets/data/tiktok.txt")
+        stealer.steal_reel()
+
         
 
