@@ -39,4 +39,4 @@ if __name__ == "__main__":
         bot.logout()
 
     if SCRAPER_TEST:
-        scraper = VideoScraper("https://www.tiktok.com/@scalingstories")
+        scraper = VideoScraper("assets/data/tiktok.txt")
