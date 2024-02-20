@@ -10,17 +10,18 @@ class ReelsGenerator:
     ID = 0
     
 
-    def __init__(self, output_dir: str, temp_loc: str):
+    def __init__(self, output_dir: str = ".", temp_loc: str = "."):
         self.TEMP_LOC = temp_loc
         self.TEMP_AUDIO = f"{self.TEMP_LOC}\\extracted.wav"
-        self.OUTPUT_DIR = f"{output_dir}\\edited{self.ID}.mp4"
+        self.OUTPUT_DIR = output_dir
 
 
     def _edit_video(self, video_path: str, lang="en") -> None:
         """Edits the video by changing the voice to other lector."""
+        file_name = f"{self.OUTPUT_DIR}\\edited_{self.ID}.mp4"
         self._extract_audio(video_path)
         self._change_voice(self.TEMP_AUDIO, lang)
-        self._replace_audio(video_path, self.TEMP_AUDIO, self.OUTPUT_DIR)
+        self._replace_audio(video_path, self.TEMP_AUDIO, file_name)
         os.remove(self.TEMP_AUDIO)  # removes the temporary audio file
         self.ID += 1
 
@@ -37,7 +38,7 @@ class ReelsGenerator:
         recognizer = sr.Recognizer()
         with file as source:
             audio = recognizer.record(source)
-        return recognizer.recognize_google(audio)
+        return recognizer.recognize_google(audio, language="en-US")
 
 
     def _text_to_voice(self, text: str, lang="eng") -> None:
@@ -48,15 +49,15 @@ class ReelsGenerator:
 
     def _extract_audio(self, video_path: str) -> None:
         """Extracts the audio from the video."""
-        clip = mp.VideoFileClip(video_path)
-        clip.audio.write_audiofile(self.TEMP_AUDIO)
+        with mp.VideoFileClip(video_path) as clip:
+            clip.audio.write_audiofile(self.TEMP_AUDIO)
 
 
     def _replace_audio(self, video_path: str, sound_path: str, file_output: str) -> None:
         """Replaces the audio in the video with the new one."""
-        video = mp.VideoFileClip(video_path)
-        audio = mp.AudioFileClip(sound_path)
-        video = video.set_audio(audio)
-        video.write_videofile(file_output)
+        with mp.VideoFileClip(video_path) as video:
+            with mp.AudioFileClip(sound_path) as audio:
+                video = video.set_audio(audio)
+                video.write_videofile(file_output)
 
 

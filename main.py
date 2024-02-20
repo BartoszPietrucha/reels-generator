@@ -24,7 +24,7 @@ STEALER_TEST = True
 if __name__ == "__main__":
     if VIDEO_TEST:
         gen = ReelsGenerator()
-        gen._edit_video("assets/test_audio/video.mp4")
+        gen._edit_video("assets/test_audio/test.mp4")
     
     
 
@@ -47,7 +47,7 @@ if __name__ == "__main__":
             downloader.download_video(link)
 
     if STEALER_TEST:
-        stealer = ReelsStealer("assets/data/tiktok.txt")
+        stealer = ReelsStealer("assets/data/stories.txt")
         stealer.steal_reel()
 
         
