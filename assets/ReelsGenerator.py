@@ -1,6 +1,7 @@
 import speech_recognition as sr
 from gtts import gTTS
 import moviepy.editor as mp
+from moviepy.video.tools.subtitles import SubtitlesClip
 import os
 import assemblyai as aai
 import pprint
@@ -58,10 +59,18 @@ class ReelsGenerator:
 
     def _replace_audio(self, video_path: str, sound_path: str, file_output: str) -> None:
         """Replaces the audio in the video with the new one."""
+        generator = lambda txt: mp.TextClip(txt, fontsize=12, font="Arial", color="white", stroke_color="black", stroke_width=2)
+        subtitles = self._create_srt()
+        sub = SubtitlesClip(subtitles, generator)
+
+        print(subtitles)
         with mp.VideoFileClip(video_path) as video:
             with mp.AudioFileClip(sound_path) as audio:
                 video = video.set_audio(audio)
+                video = mp.CompositeVideoClip([video, sub.set_position(("center", "bottom"))])
                 video.write_videofile(file_output)
+
+        sub.close()
 
     def _create_srt(self, audio=""):
         """Generates subtitles data for the video."""
@@ -75,7 +84,7 @@ class ReelsGenerator:
             """Retrieves the start and end time from the srt time."""
             result = srt_time.replace("\n", "").replace(",", ".")
             start, end = result.split(" --> ")
-            print(_format_time(start), _format_time(end))
+            return (_format_time(start), _format_time(end))
 
         
 
@@ -87,13 +96,10 @@ class ReelsGenerator:
         #srt = transcript.export_subtitles_srt()
         with open("assets/test_audio/test_srt.txt", "r", encoding="utf-8") as file:
             srt = file.readlines()
-        pprint.pprint(srt)
         texts = srt[2::4]
         times = srt[1::4]
-        print(texts, times)
-        for text, time in zip(texts, times):
-            _retrieve_time(time)
-            print(text)
+        return [(_retrieve_time(time), text) for time, text in zip(times, texts)]
+
 
     
         

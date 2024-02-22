@@ -7,6 +7,7 @@ import requests
 import json
 from instabot import Bot
 import time
+import datetime as dt
 
 # TODO:
     # 1. Instagram API in order to upload the reels
@@ -31,9 +32,10 @@ SCRAPER_TEST = False
 STEALER_TEST = False
 
 if __name__ == "__main__":
+    start = dt.datetime.now()
     if VIDEO_TEST:
         gen = ReelsGenerator()
-        gen._create_srt()
+        gen._edit_video("assets/test_audio/video.mp4")
     
     
 
@@ -61,6 +63,8 @@ if __name__ == "__main__":
     if STEALER_TEST:
         stealer = ReelsStealer("assets/data/stories.txt")
         stealer.steal_reel()
+
+    print(f"EXECUTION TIME: {dt.datetime.now() - start}")
 
         
 
