@@ -66,5 +66,10 @@ if __name__ == "__main__":
 
     print(f"EXECUTION TIME: {dt.datetime.now() - start}")
 
+    
+
+
+
+
         
 

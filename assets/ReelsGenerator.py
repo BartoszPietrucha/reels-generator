@@ -47,7 +47,7 @@ class ReelsGenerator:
 
     def _text_to_voice(self, text: str, lang="eng") -> None:
         """Generates the sound of the given text."""
-        tts = gTTS(text=text, lang=lang)
+        tts = gTTS(text=text, lang=lang, slow=False, tld="us")
         tts.save(self.TEMP_AUDIO)
 
 
@@ -58,21 +58,23 @@ class ReelsGenerator:
 
 
     def _replace_audio(self, video_path: str, sound_path: str, file_output: str) -> None:
-        """Replaces the audio in the video with the new one."""
-        generator = lambda txt: mp.TextClip(txt, fontsize=12, font="Arial", color="white", stroke_color="black", stroke_width=2)
-        subtitles = self._create_srt()
-        sub = SubtitlesClip(subtitles, generator)
-
-        print(subtitles)
+        """
+        Replaces the audio in the video with the new one.
+        Also adds the subtitles to the video.
+        """
         with mp.VideoFileClip(video_path) as video:
+            video_size = video.size
+            generator = lambda txt: mp.TextClip(txt, fontsize=70, font="Dubai-bold", color="white",
+                                                    stroke_color="black", stroke_width=2, size=video_size, method="caption",)
+            subtitles = self._create_srt(sound_path)
+            sub = SubtitlesClip(subtitles, generator)
             with mp.AudioFileClip(sound_path) as audio:
                 video = video.set_audio(audio)
                 video = mp.CompositeVideoClip([video, sub.set_position(("center", "bottom"))])
                 video.write_videofile(file_output)
 
-        sub.close()
 
-    def _create_srt(self, audio=""):
+    def _create_srt(self, audio):
         """Generates subtitles data for the video."""
 
         def _format_time(time: str) -> str:
@@ -88,14 +90,14 @@ class ReelsGenerator:
 
         
 
-        #aai.settings.api_key = os.environ["ASSEMBLYAI_KEY"]
-        #transcriber = aai.Transcriber()
+        aai.settings.api_key = os.environ["ASSEMBLYAI_KEY"]
+        transcriber = aai.Transcriber()
 
-        #transcript = transcriber.transcribe("assets/test_audio/video.mp4")
+        transcript = transcriber.transcribe(audio)
         
-        #srt = transcript.export_subtitles_srt()
-        with open("assets/test_audio/test_srt.txt", "r", encoding="utf-8") as file:
-            srt = file.readlines()
+        srt = transcript.export_subtitles_srt().split("\n")
+        #with open("assets/test_audio/test_srt.txt", "r", encoding="utf-8") as file:
+            #srt = file.readlines()
         texts = srt[2::4]
         times = srt[1::4]
         return [(_retrieve_time(time), text) for time, text in zip(times, texts)]
