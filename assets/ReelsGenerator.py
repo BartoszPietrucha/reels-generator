@@ -2,6 +2,8 @@ import speech_recognition as sr
 from gtts import gTTS
 import moviepy.editor as mp
 import os
+import assemblyai as aai
+import pprint
 
 class ReelsGenerator:
     """
@@ -60,4 +62,38 @@ class ReelsGenerator:
                 video = video.set_audio(audio)
                 video.write_videofile(file_output)
 
+    def _create_srt(self, audio=""):
+        """Generates subtitles data for the video."""
+
+        def _format_time(time: str) -> str:
+            """Formats the srt time to float number."""
+            parts = time.split(":")
+            return round(3600 * int(parts[0]) + 60 * int(parts[1]) + float(parts[2]), 1)
+
+        def _retrieve_time(srt_time: str) -> tuple:
+            """Retrieves the start and end time from the srt time."""
+            result = srt_time.replace("\n", "").replace(",", ".")
+            start, end = result.split(" --> ")
+            print(_format_time(start), _format_time(end))
+
+        
+
+        #aai.settings.api_key = os.environ["ASSEMBLYAI_KEY"]
+        #transcriber = aai.Transcriber()
+
+        #transcript = transcriber.transcribe("assets/test_audio/video.mp4")
+        
+        #srt = transcript.export_subtitles_srt()
+        with open("assets/test_audio/test_srt.txt", "r", encoding="utf-8") as file:
+            srt = file.readlines()
+        pprint.pprint(srt)
+        texts = srt[2::4]
+        times = srt[1::4]
+        print(texts, times)
+        for text, time in zip(texts, times):
+            _retrieve_time(time)
+            print(text)
+
+    
+        
 

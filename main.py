@@ -17,14 +17,14 @@ from instabot import Bot
 
 ENDPOINT = "https://www.tiktok.com/@scalingstories"
 API_TEST = False
-VIDEO_TEST = False
+VIDEO_TEST = True
 SCRAPER_TEST = False
-STEALER_TEST = True
+STEALER_TEST = False
 
 if __name__ == "__main__":
     if VIDEO_TEST:
         gen = ReelsGenerator()
-        gen._edit_video("assets/test_audio/test.mp4")
+        gen._create_srt()
     
     
 
