@@ -35,7 +35,7 @@ if __name__ == "__main__":
     start = dt.datetime.now()
     if VIDEO_TEST:
         gen = ReelsGenerator()
-        gen._edit_video("assets/test_audio/video.mp4")
+        gen._edit_video(original="assets/test_audio/video.mp4", sample="assets/test_audio/test_sample.mp4")
     
     
 

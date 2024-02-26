@@ -20,12 +20,12 @@ class ReelsGenerator:
         self.OUTPUT_DIR = output_dir
 
 
-    def _edit_video(self, video_path: str, lang="en") -> None:
+    def _edit_video(self, original: str, sample: str, lang="en") -> None:
         """Edits the video by changing the voice to other lector."""
         file_name = f"{self.OUTPUT_DIR}\\edited_{self.ID}.mp4"
-        self._extract_audio(video_path)
+        self._extract_audio(original)
         self._change_voice(self.TEMP_AUDIO, lang)
-        self._replace_audio(video_path, self.TEMP_AUDIO, file_name)
+        self._replace_audio(sample, self.TEMP_AUDIO, file_name)
         os.remove(self.TEMP_AUDIO)  # removes the temporary audio file
         self.ID += 1
 
@@ -45,7 +45,7 @@ class ReelsGenerator:
         return recognizer.recognize_google(audio, language="en-US")
 
 
-    def _text_to_voice(self, text: str, lang="eng") -> None:
+    def _text_to_voice(self, text: str, lang="en") -> None:
         """Generates the sound of the given text."""
         tts = gTTS(text=text, lang=lang, slow=False, tld="us")
         tts.save(self.TEMP_AUDIO)
@@ -64,13 +64,14 @@ class ReelsGenerator:
         """
         with mp.VideoFileClip(video_path) as video:
             video_size = video.size
-            generator = lambda txt: mp.TextClip(txt, fontsize=70, font="Dubai-bold", color="white",
-                                                    stroke_color="black", stroke_width=2, size=video_size, method="caption",)
+            generator = lambda txt: mp.TextClip(txt, fontsize=50, font="Candara-bold", color="white",
+                                                    stroke_color="black", stroke_width=2, size=video_size, method="caption")
             subtitles = self._create_srt(sound_path)
             sub = SubtitlesClip(subtitles, generator)
             with mp.AudioFileClip(sound_path) as audio:
                 video = video.set_audio(audio)
                 video = mp.CompositeVideoClip([video, sub.set_position(("center", "bottom"))])
+                video = video.subclip(0, min(audio.duration, video.duration))
                 video.write_videofile(file_output)
 
 
